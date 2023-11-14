@@ -18,7 +18,7 @@ app.use(express.json());
 
 app.post("/register", UserController.registerUser);
 
-app.post("/login");
+app.post("/login", UserController.loginUser);
 
 app.use(errorHandler);
 
