@@ -2,9 +2,6 @@ const request = require("supertest");
 
 const app = require("../app.js");
 const { User } = require("../models");
-const { createToken } = require("../helpers/jwt.js");
-
-let token;
 
 beforeAll(async () => {
     let newUser = await User.create({
