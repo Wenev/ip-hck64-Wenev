@@ -126,7 +126,7 @@ describe("POST /login", () => {
 
         expect(response.status).toBe(400);
         expect(response.body).toBeInstanceOf(Object);
-        expect(response.body).toHaveProperty("message", "Email must not be empty");
+        expect(response.body).toHaveProperty("message", "Email/Username must not be empty");
     });
 
     it("should be able to respond to 400 when password is empty", async () => {
