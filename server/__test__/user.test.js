@@ -89,3 +89,81 @@ describe("POST /register", () => {
         expect(response.body).toHaveProperty("message", "Username has already been used");
     });
 });
+
+describe("POST /login", () => {
+    it("should be able to login and send access token when using username", async () => {
+        const testData = {
+            username: "Test User",
+            password: "TestUser"
+        }
+
+        const response = await request(app).post("/login").send(testData);
+
+        expect(response.status).toBe(200);
+        expect(response.body).toBeInstanceOf(Object);
+        expect(response.body).toHaveProperty("access_token", expect.any(String));
+    });
+
+    it("should be able to login and send access token when using email", async () => {
+        const testData = {
+            email: "james@mailxlx.com",
+            password: "TestUser"
+        }
+
+        const response = await request(app).post("/login").send(testData);
+
+        expect(response.status).toBe(200);
+        expect(response.body).toBeInstanceOf(Object);
+        expect(response.body).toHaveProperty("access_token", expect.any(String));
+    });
+
+    it("should be able to respond to 400 when email/username is empty", async () => {
+        const testData = {
+            password: "TestUser"
+        }
+
+        const response = await request(app).post("/login").send(testData);
+
+        expect(response.status).toBe(400);
+        expect(response.body).toBeInstanceOf(Object);
+        expect(response.body).toHaveProperty("message", "Email/Username must not be empty");
+    });
+
+    it("should be able to respond to 400 when password is empty", async () => {
+        const testData = {
+            email: "james@mailxlx.com"
+        }
+
+        const response = await request(app).post("/login").send(testData);
+
+        expect(response.status).toBe(400);
+        expect(response.body).toBeInstanceOf(Object);
+        expect(response.body).toHaveProperty("message", "Password must not be empty");
+    });
+
+    it("should be able to respond to 401 when password is wrong", async () => {
+        const testData = {
+            email: "james@mailxlx.com",
+            password: "WrongPassword"
+        }
+
+        const response = await request(app).post("/login").send(testData);
+
+        expect(response.status).toBe(401);
+        expect(response.body).toBeInstanceOf(Object);
+        expect(response.body).toHaveProperty("message", "Invalid Email/Username/Password");
+    });
+
+    it("should be able to respond to 401 when email is wrong", async () => {
+        const testData = {
+            email: "wrong.email@mailxlx.com",
+            password: "TestUser"
+        }
+
+        const response = await request(app).post("/login").send(testData);
+
+        expect(response.status).toBe(401);
+        expect(response.body).toBeInstanceOf(Object);
+        expect(response.body).toHaveProperty("message", "Invalid Email/Username/Password");
+    });
+});
