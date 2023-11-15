@@ -1,4 +1,4 @@
-const { Collection } = require("../models");
+const { Collection, User } = require("../models");
 
 class CollectionController {
     static async getAllCollections(req, res, next) {
@@ -30,7 +30,17 @@ class CollectionController {
     }
     static async getUsersCollections(req, res, next) {
         try {
+            const { username } = req.params;
+
+            const selectedUser = await User.findOne({ where: { username: username } });
             
+            if(!selectedUser) {
+                throw { name: "SequelizeDatabaseError" };
+            }
+
+            const userCollections = await Collection.findAll({ where: { UserId: selectedUser.id } });
+
+            res.status(200).json(userCollections);
         }
         catch(error) {
             next(error);

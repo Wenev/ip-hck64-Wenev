@@ -129,38 +129,38 @@ describe("POST /collections", () => {
     });
 });
 
-// describe("GET /collections/:username", () => {
-//     it("should be able to get all users' collections", async () => {
-//         const response = await request(app).get(`/collections/${newUser.username}`).set("Authorization", `Bearer ${token}`);
+describe("GET /collections/:username", () => {
+    it("should be able to get all users' collections", async () => {
+        const response = await request(app).get(`/collections/${newUser.username}`).set("Authorization", `Bearer ${token}`);
 
-//         expect(response.status).toBe(200);
-//         expect(response.body).toBeInstanceOf(Array);
-//         expect(response.body[0]).toHaveProperty("id", expect.any(Number));
-//         expect(response.body[0]).toHaveProperty("collectionName", "WOE Personal Collection");
-//         expect(response.body[0]).toHaveProperty("UserId", newUser.id);
-//     });
+        expect(response.status).toBe(200);
+        expect(response.body).toBeInstanceOf(Array);
+        expect(response.body[0]).toHaveProperty("id", expect.any(Number));
+        expect(response.body[0]).toHaveProperty("collectionName", "WOE Personal Collection");
+        expect(response.body[0]).toHaveProperty("UserId", newUser.id);
+    });
 
-//     it("should be able to respond to 404 when username is invalid", async () => {
-//         const response = await request(app).get(`/collections/wronguser123`);
+    it("should be able to respond to 404 when username is invalid", async () => {
+        const response = await request(app).get(`/collections/wronguser123`).set("Authorization", `Bearer ${token}`);
 
-//         expect(response.status).toBe(404);
-//         expect(response.body).toBeInstanceOf(Object);
-//         expect(response.body).toHaveProperty("message", "Data Not Found");
-//     });
+        expect(response.status).toBe(404);
+        expect(response.body).toBeInstanceOf(Object);
+        expect(response.body).toHaveProperty("message", "Data Not Found");
+    });
 
-//     it("should be able to respond to 401 when token not logged in", async () => {
-//         const response = await request(app).get(`/collections/${newUser.username}`);
+    it("should be able to respond to 401 when token not logged in", async () => {
+        const response = await request(app).get(`/collections/${newUser.username}`);
 
-//         expect(response.status).toBe(401);
-//         expect(response.body).toBeInstanceOf(Object);
-//         expect(response.body).toHaveProperty("message", "User hasn't logged in");
-//     });
+        expect(response.status).toBe(401);
+        expect(response.body).toBeInstanceOf(Object);
+        expect(response.body).toHaveProperty("message", "User hasn't logged in");
+    });
 
-//     it("should be able to respond to 401 when token is invalid", async () => {
-//         const response = await request(app).get(`/collections/${newUser.username}`).set("Authorization", `Bearer InvalidToken`);
+    it("should be able to respond to 401 when token is invalid", async () => {
+        const response = await request(app).get(`/collections/${newUser.username}`).set("Authorization", `Bearer InvalidToken`);
 
-//         expect(response.status).toBe(401);
-//         expect(response.body).toBeInstanceOf(Object);
-//         expect(response.body).toHaveProperty("message", "jwt malformed");
-//     });
-// });
+        expect(response.status).toBe(401);
+        expect(response.body).toBeInstanceOf(Object);
+        expect(response.body).toHaveProperty("message", "jwt malformed");
+    });
+});
