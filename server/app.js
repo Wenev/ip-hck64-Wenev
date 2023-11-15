@@ -25,13 +25,13 @@ app.get("/collections", CollectionController.getAllCollections);
 
 app.get("/collections/:username", CollectionController.getUsersCollections);
 
+app.get("/collection/:collectionId", CollectionController.getCollectionDetails);
+
 app.use(authentication);
 
 app.post("/collections", CollectionController.postCollection);
 
-app.post("/collections/:collectionId", CardCollection.addCardToCollection);
-
-// app.get("/collections/:collectionId", CollectionController.getCollectionDetails);
+app.post("/collection/:collectionId", CardCollection.addCardToCollection);
 
 app.get("/cards", CardCollection.getCardsFromScryfall);
 
