@@ -11,17 +11,26 @@ class CollectionController {
             next(error);
         }
     }
-    static async getUsersCollections(req, res, next) {
+    static async postCollection(req, res, next) {
         try {
+            const { collectionName, description } = req.body;
+            const UserId = req.user.id;
+
+            const newCollection = await Collection.create({
+                collectionName: collectionName,
+                description: description,
+                UserId: UserId
+            });
             
+            res.status(201).json({ message: `Collection "${collectionName}" successfully added` });
         }
         catch(error) {
             next(error);
         }
     }
-    static async postCollection(req, res, next) {
+    static async getUsersCollections(req, res, next) {
         try {
-
+            
         }
         catch(error) {
             next(error);
