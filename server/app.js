@@ -26,9 +26,9 @@ app.get("/collections", CollectionController.getAllCollections);
 
 app.post("/collections", CollectionController.postCollection);
 
-// app.get("/collections/:username", CollectionController.getUsersCollections);
+app.get("/collections/:username", CollectionController.getUsersCollections);
 
-// app.get("/collections/:id", CollectionController.getCollectionDetails);
+// app.get("/collections/:collectionId", CollectionController.getCollectionDetails);
 
 app.use(errorHandler);
 
