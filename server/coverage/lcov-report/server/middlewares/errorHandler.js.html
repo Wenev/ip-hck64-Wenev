@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">57.14% </span>
+                <span class="strong">7.14% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>8/14</span>
+                <span class='fraction'>1/14</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">55.55% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>5/9</span>
+                <span class='fraction'>0/9</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>1/1</span>
+                <span class='fraction'>0/1</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">57.14% </span>
+                <span class="strong">7.14% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>8/14</span>
+                <span class='fraction'>1/14</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line medium'></div>
+    <div class='status-line low'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -89,51 +89,51 @@
 <a name='L24'></a><a href='#L24'>24</a>
 <a name='L25'></a><a href='#L25'>25</a>
 <a name='L26'></a><a href='#L26'>26</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span></td><td class="text"><pre class="prettyprint lang-js">function errorHandler(error, req, res, next) {
-    switch(error.name) {
+<span class="cline-any cline-yes">1x</span></td><td class="text"><pre class="prettyprint lang-js">function <span class="fstat-no" title="function not covered" >errorHandler(</span>error, req, res, next) {
+<span class="cstat-no" title="statement not covered" >    switch(error.name) {</span>
         case "InvalidToken":
         case "Unauthenticated":
         case "JsonWebTokenError":
-            res.status(401).json({ message: error.message });
-            break;
-<span class="branch-3 cbranch-no" title="branch not covered" >        case "InvalidInput":</span>
+<span class="cstat-no" title="statement not covered" >            res.status(401).json({ message: error.message });</span>
+<span class="cstat-no" title="statement not covered" >            break;</span>
+        case "InvalidInput":
 <span class="cstat-no" title="statement not covered" >            res.status(400).json({ message: error.message });</span>
 <span class="cstat-no" title="statement not covered" >            break;</span>
-<span class="branch-4 cbranch-no" title="branch not covered" >        case "SequelizeUniqueConstraintError":</span>
+        case "SequelizeUniqueConstraintError":
         case "SequelizeValidationError":
-            res.status(400).json({ message: error.errors[0].message });
-            break;
-<span class="branch-6 cbranch-no" title="branch not covered" >        case "Forbidden":</span>
+<span class="cstat-no" title="statement not covered" >            res.status(400).json({ message: error.errors[0].message });</span>
+<span class="cstat-no" title="statement not covered" >            break;</span>
+        case "Forbidden":
 <span class="cstat-no" title="statement not covered" >            res.status(403).json({ message: "Forbidden Access" });</span>
 <span class="cstat-no" title="statement not covered" >            break;</span>
         case "SequelizeDatabaseError":
-            res.status(404).json({ message: "Data Not Found" });
-            break;
-<span class="branch-8 cbranch-no" title="branch not covered" >        default :</span>
+<span class="cstat-no" title="statement not covered" >            res.status(404).json({ message: "Data Not Found" });</span>
+<span class="cstat-no" title="statement not covered" >            break;</span>
+        default :
 <span class="cstat-no" title="statement not covered" >            res.status(500).json({ message: "Internal Server Error" })</span>
 <span class="cstat-no" title="statement not covered" >            break;</span>
     }
@@ -145,7 +145,7 @@ module.exports = errorHandler;</pre></td></tr></table></pre>
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-11-15T06:27:32.086Z
+                at 2023-11-15T09:23:24.873Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

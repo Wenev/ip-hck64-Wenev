@@ -50,7 +50,7 @@ afterAll(async () => {
 
 describe("GET /cards", () => {
     it("should be able to get cards based on name search", async () => {
-        const response = await request(app).get("cards").query({ search: "Brago, King Eternal" }).set("Authorization", `Bearer ${token}`);
+        const response = await request(app).get("/cards").query({ search: "Brago, King Eternal" }).set("Authorization", `Bearer ${token}`);
 
         expect(response.status).toBe(200);
         expect(response.body).toBeInstanceOf(Object);
