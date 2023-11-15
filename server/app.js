@@ -24,7 +24,7 @@ app.use(authentication);
 
 app.get("/collections", CollectionController.getAllCollections);
 
-// app.post("/collections", CollectionController.postCollection);
+app.post("/collections", CollectionController.postCollection);
 
 // app.get("/collections/:username", CollectionController.getUsersCollections);
 

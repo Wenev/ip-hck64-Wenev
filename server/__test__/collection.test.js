@@ -76,61 +76,58 @@ describe("GET /collections", () => {
     });
 });
 
-// describe("POST /collections", () => {
-//     it("should be able to post user's collection", async () => {
-//         const testData = {
-//             collectionName: "Test Add Collection",
-//             description: "hello",
-//         }
+describe("POST /collections", () => {
+    it("should be able to post user's collection", async () => {
+        const testData = {
+            collectionName: "Test Add Collection",
+            description: "hello"
+        }
 
-//         const response = await request(app).post("/collections").set("Authorization", `Bearer ${token}`).send(testData);
+        const response = await request(app).post("/collections").set("Authorization", `Bearer ${token}`).send(testData);
 
-//         expect(response.status).toBe(200);
-//         expect(response.body).toBeInstanceOf(Object);
-//         expect(response.body).toHaveProperty("id", expect.any(Number));
-//         expect(response.body).toHaveProperty("collectionName", "WOE Personal Collection");
-//         expect(response.body).toHaveProperty("UserId", newUser.id);
-//         expect(response.body).toHaveProperty("message", `Collection "${testData.collectionName}" successfully added`);
-//     });
+        expect(response.status).toBe(201);
+        expect(response.body).toBeInstanceOf(Object);
+        expect(response.body).toHaveProperty("message", `Collection "${testData.collectionName}" successfully added`);
+    });
 
-//     it("should be able to respond to 401 when token not logged in", async () => {
-//         const testData = {
-//             collectionName: "Test Add Collection",
-//             description: "hello",
-//         }
+    it("should be able to respond to 401 when token not logged in", async () => {
+        const testData = {
+            collectionName: "Test Add Collection",
+            description: "hello",
+        }
 
-//         const response = await request(app).post("/collections").send(testData);
+        const response = await request(app).post("/collections").send(testData);
 
-//         expect(response.status).toBe(401);
-//         expect(response.body).toBeInstanceOf(Object);
-//         expect(response.body).toHaveProperty("message", "User hasn't logged in");
-//     });
+        expect(response.status).toBe(401);
+        expect(response.body).toBeInstanceOf(Object);
+        expect(response.body).toHaveProperty("message", "User hasn't logged in");
+    });
 
-//     it("should be able to respond to 401 when token is invalid", async () => {
-//         const testData = {
-//             collectionName: "Test Add Collection",
-//             description: "hello",
-//         }
+    it("should be able to respond to 401 when token is invalid", async () => {
+        const testData = {
+            collectionName: "Test Add Collection",
+            description: "hello",
+        }
 
-//         const response = await request(app).post("/collections").set("Authorization", `Bearer InvalidToken`).send(testData);
+        const response = await request(app).post("/collections").set("Authorization", `Bearer InvalidToken`).send(testData);
 
-//         expect(response.status).toBe(401);
-//         expect(response.body).toBeInstanceOf(Object);
-//         expect(response.body).toHaveProperty("message", "jwt malformed");
-//     });
+        expect(response.status).toBe(401);
+        expect(response.body).toBeInstanceOf(Object);
+        expect(response.body).toHaveProperty("message", "jwt malformed");
+    });
 
-//     it("should be able to respond to 400 when token is invalid", async () => {
-//         const testData = {
-//             description: "hello",
-//         }
+    it("should be able to respond to 400 when token is invalid", async () => {
+        const testData = {
+            description: "hello",
+        }
 
-//         const response = await request(app).post("/collections").set("Authorization", `Bearer ${token}`).send(testData);
+        const response = await request(app).post("/collections").set("Authorization", `Bearer ${token}`).send(testData);
 
-//         expect(response.status).toBe(401);
-//         expect(response.body).toBeInstanceOf(Object);
-//         expect(response.body).toHaveProperty("message", "Collection Name must not be empty");
-//     });
-// });
+        expect(response.status).toBe(400);
+        expect(response.body).toBeInstanceOf(Object);
+        expect(response.body).toHaveProperty("message", "Collection Name must not be empty");
+    });
+});
 
 // describe("GET /collections/:username", () => {
 //     it("should be able to get all users' collections", async () => {
