@@ -2,7 +2,7 @@ const request = require("supertest");
 
 const app = require("../app.js");
 const { Collection, User } = require("../models");
-const { createToken }= require("../helpers/jwt")
+const { createToken }= require("../helpers/jwt");
 
 let newUser;
 let token;

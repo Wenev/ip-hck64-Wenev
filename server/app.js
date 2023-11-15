@@ -30,6 +30,8 @@ app.get("/collections/:username", CollectionController.getUsersCollections);
 
 // app.get("/collections/:collectionId", CollectionController.getCollectionDetails);
 
+app.get("/cards", CardCollection.getCardsFromScryfall);
+
 app.use(errorHandler);
 
 module.exports = app;
