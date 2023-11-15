@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       Collection.belongsTo(models.User);
-      Collection.hasMany(models.CardCollection);
+      Collection.hasMany(models.CardCollection, {as: "Cards"});
     }
   }
   Collection.init({

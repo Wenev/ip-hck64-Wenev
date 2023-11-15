@@ -1,4 +1,7 @@
-const { Collection, User } = require("../models");
+const { default: axios } = require("axios");
+const { delay } = require("../helpers/delay");
+const { CardCollection, Collection, User } = require("../models");
+const { scryfallUrl } = require("../URLs");
 
 class CollectionController {
     static async getAllCollections(req, res, next) {
@@ -33,7 +36,7 @@ class CollectionController {
             const { username } = req.params;
 
             const selectedUser = await User.findOne({ where: { username: username } });
-            
+
             if(!selectedUser) {
                 throw { name: "SequelizeDatabaseError" };
             }
@@ -48,7 +51,32 @@ class CollectionController {
     }
     static async getCollectionDetails(req, res, next) {
         try {
+            const { collectionId } = req.params;
 
+            const collection = await Collection.findOne({
+                where: {
+                    id: collectionId,
+                },
+                include: {
+                    model: CardCollection,
+                    as: "Cards",
+                },
+            });
+
+            if(!collection) {
+                throw { name: "SequelizeDatabaseError" };
+            }
+
+            collection.Cards.map(async (card) => {
+                card.data = await axios({
+                    method: "get",
+                    url: `${scryfallUrl}/${card.CardId}`
+                })
+                await delay(80);
+                return card;
+            });
+
+            res.status(200).json(collection);
         }
         catch(error) {
             next(error);
