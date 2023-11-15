@@ -11,6 +11,7 @@ const CollectionController = require("./controllers/CollectionController.js")
 const UserController = require("./controllers/UserController.js");
 const authentication = require("./middlewares/authentication.js");
 const errorHandler = require("./middlewares/errorHandler.js");
+const { ownerAuthorization } = require("./middlewares/authorization.js")
 
 app.use(cors());
 app.use(express.urlencoded({extended:true}));
@@ -20,13 +21,13 @@ app.post("/register", UserController.registerUser);
 
 app.post("/login", UserController.loginUser);
 
-app.use(authentication);
-
 app.get("/collections", CollectionController.getAllCollections);
 
-app.post("/collections", CollectionController.postCollection);
-
 app.get("/collections/:username", CollectionController.getUsersCollections);
+
+app.use(authentication);
+
+app.post("/collections", CollectionController.postCollection);
 
 app.post("/collections/:collectionId", CardCollection.addCardToCollection);
 

@@ -6,6 +6,8 @@ const { createToken }= require("../helpers/jwt");
 
 let newUser;
 let token;
+let secondUser;
+let secondToken;
 let newCollection;
 
 beforeAll(async () => {
@@ -17,7 +19,17 @@ beforeAll(async () => {
         password: "TestUser"
     });
 
+    secondUser = await User.create({
+        username: "jimmy",
+        firstName: "Jimmy",
+        lastName: "Dollan",
+        email: "jimmydollan@mail.com",
+        password: "TestUser"
+    });
+
     token = createToken({ id: newUser.id });
+
+    secondToken = createToken({ id: secondUser.id });
 
     newCollection = await Collection.create({
         collectionName: "WOE Personal Collection",

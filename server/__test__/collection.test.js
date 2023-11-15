@@ -58,22 +58,6 @@ describe("GET /collections", () => {
         expect(response.body[0]).toHaveProperty("collectionName", "WOE Personal Collection");
         expect(response.body[0]).toHaveProperty("UserId", newUser.id);
     });
-
-    it("should be able to respond to when token not logged in", async () => {
-        const response = await request(app).get("/collections");
-
-        expect(response.status).toBe(401);
-        expect(response.body).toBeInstanceOf(Object);
-        expect(response.body).toHaveProperty("message", "User hasn't logged in");
-    });
-
-    it("should be able to respond to when token is invalid", async () => {
-        const response = await request(app).get("/collections").set("Authorization", `Bearer InvalidToken`);
-
-        expect(response.status).toBe(401);
-        expect(response.body).toBeInstanceOf(Object);
-        expect(response.body).toHaveProperty("message", "jwt malformed");
-    });
 });
 
 describe("POST /collections", () => {
@@ -90,7 +74,7 @@ describe("POST /collections", () => {
         expect(response.body).toHaveProperty("message", `Collection "${testData.collectionName}" successfully added`);
     });
 
-    it("should be able to respond to 401 when token not logged in", async () => {
+    it("should be able to respond to 401 when user is not logged in", async () => {
         const testData = {
             collectionName: "Test Add Collection",
             description: "hello",
@@ -116,7 +100,7 @@ describe("POST /collections", () => {
         expect(response.body).toHaveProperty("message", "jwt malformed");
     });
 
-    it("should be able to respond to 400 when token is invalid", async () => {
+    it("should be able to respond to 400 when collectionName is invalid", async () => {
         const testData = {
             description: "hello",
         }
@@ -146,21 +130,5 @@ describe("GET /collections/:username", () => {
         expect(response.status).toBe(404);
         expect(response.body).toBeInstanceOf(Object);
         expect(response.body).toHaveProperty("message", "Data Not Found");
-    });
-
-    it("should be able to respond to 401 when token not logged in", async () => {
-        const response = await request(app).get(`/collections/${newUser.username}`);
-
-        expect(response.status).toBe(401);
-        expect(response.body).toBeInstanceOf(Object);
-        expect(response.body).toHaveProperty("message", "User hasn't logged in");
-    });
-
-    it("should be able to respond to 401 when token is invalid", async () => {
-        const response = await request(app).get(`/collections/${newUser.username}`).set("Authorization", `Bearer InvalidToken`);
-
-        expect(response.status).toBe(401);
-        expect(response.body).toBeInstanceOf(Object);
-        expect(response.body).toHaveProperty("message", "jwt malformed");
     });
 });
