@@ -81,7 +81,7 @@ describe("GET /cards", () => {
 
 });
 
-describe("POST /collections/:collectionId", () => {
+describe("POST /collection/:collectionId", () => {
     it("should be able to post cards to collections", async () => {
         const testData = {
             CardId: "0ac3fb08-741a-49e5-9fae-b26819677d24",
@@ -89,7 +89,7 @@ describe("POST /collections/:collectionId", () => {
             ownedFrom: new Date()
         }
 
-        const response = await request(app).post(`/collections/${newCollection.id}`).set("Authorization", `Bearer ${token}`).send(testData);
+        const response = await request(app).post(`/collection/${newCollection.id}`).set("Authorization", `Bearer ${token}`).send(testData);
 
         expect(response.status).toBe(201);
         expect(response.body).toBeInstanceOf(Object);
@@ -103,7 +103,7 @@ describe("POST /collections/:collectionId", () => {
             ownedFrom: new Date()
         }
 
-        const response = await request(app).post(`/collections/999`).set("Authorization", `Bearer ${token}`).send(testData);
+        const response = await request(app).post(`/collection/999`).set("Authorization", `Bearer ${token}`).send(testData);
 
         expect(response.status).toBe(404);
         expect(response.body).toBeInstanceOf(Object);
@@ -117,7 +117,7 @@ describe("POST /collections/:collectionId", () => {
             ownedFrom: new Date()
         }
 
-        const response = await request(app).post(`/collections/${newCollection.id}`).set("Authorization", `Bearer ${token}`).send(testData);
+        const response = await request(app).post(`/collection/${newCollection.id}`).set("Authorization", `Bearer ${token}`).send(testData);
 
         expect(response.status).toBe(404);
         expect(response.body).toBeInstanceOf(Object);
@@ -131,7 +131,7 @@ describe("POST /collections/:collectionId", () => {
             ownedFrom: "wrongDate"
         }
 
-        const response = await request(app).post(`/collections/${newCollection.id}`).set("Authorization", `Bearer ${token}`).send(testData);
+        const response = await request(app).post(`/collection/${newCollection.id}`).set("Authorization", `Bearer ${token}`).send(testData);
 
         expect(response.status).toBe(400);
         expect(response.body).toBeInstanceOf(Object);
@@ -145,7 +145,7 @@ describe("POST /collections/:collectionId", () => {
             ownedFrom: new Date()
         }
 
-        const response = await request(app).post(`/collections/${newCollection.id}`).set("Authorization", `Bearer ${token}`).send(testData);
+        const response = await request(app).post(`/collection/${newCollection.id}`).set("Authorization", `Bearer ${token}`).send(testData);
 
         expect(response.status).toBe(400);
         expect(response.body).toBeInstanceOf(Object);
@@ -158,7 +158,7 @@ describe("POST /collections/:collectionId", () => {
             ownedFrom: new Date()
         }
 
-        const response = await request(app).post(`/collections/${newCollection.id}`).set("Authorization", `Bearer ${token}`).send(testData);
+        const response = await request(app).post(`/collection/${newCollection.id}`).set("Authorization", `Bearer ${token}`).send(testData);
 
         expect(response.status).toBe(400);
         expect(response.body).toBeInstanceOf(Object);
@@ -172,7 +172,7 @@ describe("POST /collections/:collectionId", () => {
             ownedFrom: new Date()
         }
 
-        const response = await request(app).post(`/collections/${newCollection.id}`).send(testData);
+        const response = await request(app).post(`/collection/${newCollection.id}`).send(testData);
 
         expect(response.status).toBe(401);
         expect(response.body).toBeInstanceOf(Object);
@@ -186,7 +186,7 @@ describe("POST /collections/:collectionId", () => {
             ownedFrom: new Date()
         }
 
-        const response = await request(app).post(`/collections/${newCollection.id}`).set("Authorization", `Bearer InvalidToken`).send(testData);
+        const response = await request(app).post(`/collection/${newCollection.id}`).set("Authorization", `Bearer InvalidToken`).send(testData);
 
         expect(response.status).toBe(401);
         expect(response.body).toBeInstanceOf(Object);
