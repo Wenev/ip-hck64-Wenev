@@ -49,6 +49,24 @@ describe("GET /cards", () => {
         expect(response.body.data[0]).toHaveProperty("id", expect.any(String));
         expect(response.body.data[0]).toHaveProperty("name", "Brago, King Eternal");
     });
+
+    it("should be able to respond to 401 when user not logged in", async () => {
+        const response = await request(app).get("/cards").query({ search: "Brago, King Eternal" });
+
+       expect(response.status).toBe(401);
+       expect(response.body).toBeInstanceOf(Object);
+       expect(response.body).toHaveProperty("message", "User hasn't logged in");
+    });
+
+    it("should be able to respond to 401 when token is invalid", async () => {
+        const response = await request(app).get("/cards").query({ search: "Brago, King Eternal" }).set("Authorization", `Bearer InvalidToken`);
+
+        expect(response.status).toBe(401);
+        expect(response.body).toBeInstanceOf(Object);
+        expect(response.body).toHaveProperty("message", "jwt malformed");
+     });
+
+
 });
 
 describe("POST /collections/:collectionId", () => {
@@ -63,7 +81,7 @@ describe("POST /collections/:collectionId", () => {
 
         expect(response.status).toBe(201);
         expect(response.body).toBeInstanceOf(Object);
-        expect(response.body).toHaveProperty("CardId", expect.any(String));
+        expect(response.body).toHaveProperty("message", `Brago, King Eternal added to WOE Personal Collection`);
      });
 
      it("should be able to respond to 404 when collectionId is invalid", async () => {

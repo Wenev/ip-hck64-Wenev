@@ -28,6 +28,8 @@ app.post("/collections", CollectionController.postCollection);
 
 app.get("/collections/:username", CollectionController.getUsersCollections);
 
+app.post("/collections/:collectionId", CardCollection.addCardToCollection);
+
 // app.get("/collections/:collectionId", CollectionController.getCollectionDetails);
 
 app.get("/cards", CardCollection.getCardsFromScryfall);
