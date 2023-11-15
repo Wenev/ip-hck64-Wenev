@@ -1,4 +1,5 @@
 function errorHandler(error, req, res, next) {
+    console.log(error)
     switch(error.name) {
         case "InvalidToken":
         case "Unauthenticated":
@@ -15,9 +16,15 @@ function errorHandler(error, req, res, next) {
         case "Forbidden":
             res.status(403).json({ message: "Forbidden Access" });
             break;
+        case "ScryfallDatabaseError":
         case "SequelizeDatabaseError":
             res.status(404).json({ message: "Data Not Found" });
             break;
+        case "AxiosError":
+            if(error.response.status === 404) {
+                res.status(404).json({ message: "Data Not Found" })
+                break;
+            }
         default :
             res.status(500).json({ message: "Internal Server Error" })
             break;

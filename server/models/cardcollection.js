@@ -20,7 +20,7 @@ module.exports = (sequelize, DataTypes) => {
       validate: {
         isDate: {
           args: true,
-          msg: "Owned Date must be a Date."
+          msg: "Owned Date must be a Date"
         },
       },
     },
