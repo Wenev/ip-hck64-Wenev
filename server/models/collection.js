@@ -11,6 +11,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       Collection.belongsTo(models.User);
+      Collection.hasMany(models.CardCollection);
     }
   }
   Collection.init({
@@ -31,6 +32,20 @@ module.exports = (sequelize, DataTypes) => {
     description: {
       type: DataTypes.TEXT,
       allowNull: true,
+    },
+    UserId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      validate: {
+        notNull: {
+          args: true,
+          msg: "UserId must not be empty"
+        },
+        notEmpty: {
+          args: true,
+          msg: "UserId must not be empty"
+        },
+      },
     },
   }, {
     sequelize,

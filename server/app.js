@@ -20,6 +20,16 @@ app.post("/register", UserController.registerUser);
 
 app.post("/login", UserController.loginUser);
 
+app.use(authentication);
+
+app.get("/collections", CollectionController.getAllCollections);
+
+// app.post("/collections", CollectionController.postCollection);
+
+// app.get("/collections/:username", CollectionController.getUsersCollections);
+
+// app.get("/collections/:id", CollectionController.getCollectionDetails);
+
 app.use(errorHandler);
 
 module.exports = app;
