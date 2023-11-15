@@ -33,6 +33,10 @@ module.exports = (sequelize, DataTypes) => {
           args: true,
           msg: "Username must not be empty"
         },
+        isAlphanumeric: {
+          args: true,
+          msg: "Username must only contain letters or numbers"
+        }
       },
     },
     firstName: {
