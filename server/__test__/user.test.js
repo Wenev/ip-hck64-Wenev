@@ -5,7 +5,7 @@ const { User } = require("../models");
 
 beforeAll(async () => {
     let newUser = await User.create({
-        username: "Test User",
+        username: "TestUser",
         firstName: "James",
         lastName: "Corden",
         email: "james@mailxlx.com",
@@ -24,7 +24,7 @@ afterAll(async () => {
 describe("POST /register", () => {
     it("should be able to register user to database", async () => {
         const testData = {
-            username: "Joe Biden",
+            username: "JoeBiden",
             firstName: "Joe",
             lastName: "Biden",
             email: "bidenjoe@mailxlx.com",
@@ -35,12 +35,12 @@ describe("POST /register", () => {
 
         expect(response.status).toBe(201);
         expect(response.body).toBeInstanceOf(Object);
-        expect(response.body).toHaveProperty("message", "User Joe Biden has been created");
+        expect(response.body).toHaveProperty("message", "User JoeBiden has been created");
     });
 
     it("should be able to respond to 400 when password is below 8 characters", async () => {
         const testData = {
-            username: "Joe Biden",
+            username: "JoeBiden",
             firstName: "Joe",
             lastName: "Biden",
             email: "example@mailxlx.com",
@@ -70,9 +70,25 @@ describe("POST /register", () => {
         expect(response.body).toHaveProperty("message", "Email has already been used");
     });
 
-    it("should be able to respond to 400 when Username already used", async () => {
+    it("should be able to respond to 400 when Username is not alphanumberic", async () => {
         const testData = {
             username: "Test User",
+            firstName: "Joe",
+            lastName: "Biden",
+            email: "newother@mailxlx.com",
+            password: "Passwordistrue"
+        }
+
+        const response = await request(app).post("/register").send(testData);
+
+        expect(response.status).toBe(400);
+        expect(response.body).toBeInstanceOf(Object);
+        expect(response.body).toHaveProperty("message", "Username must only contain letters or numbers");
+    });
+
+    it("should be able to respond to 400 when Username already used", async () => {
+        const testData = {
+            username: "TestUser",
             firstName: "Joe",
             lastName: "Biden",
             email: "other@mailxlx.com",
@@ -90,7 +106,7 @@ describe("POST /register", () => {
 describe("POST /login", () => {
     it("should be able to login and send access token when using username", async () => {
         const testData = {
-            username: "Test User",
+            username: "TestUser",
             password: "TestUser"
         }
 
