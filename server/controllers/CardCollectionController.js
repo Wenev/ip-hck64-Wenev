@@ -1,6 +1,7 @@
 const axios = require("axios");
 const { scryfallUrl } = require("../URLs.js");
 const { CardCollection, Collection } = require("../models");
+const { delay } = require("../helpers/delay.js");
 
 class CardCollectionController {
     static async addCardToCollection(req, res, next) {
@@ -15,6 +16,7 @@ class CardCollectionController {
                 method: "get",
                 url: `${scryfallUrl}/cards/${CardId}`
             });
+            await delay(80);
 
             const { collectionId } = req.params;
 
@@ -46,6 +48,7 @@ class CardCollectionController {
                 method: "get",
                 url: `${scryfallUrl}/cards/search?q=${cardNameSearch}`,
             });
+            await delay(80);
 
             res.status(200).json(data);
         }
