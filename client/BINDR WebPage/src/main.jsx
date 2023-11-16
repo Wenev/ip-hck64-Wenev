@@ -9,6 +9,7 @@ import App from './App.jsx'
 import './index.css'
 import LoginLayout from './layouts/LoginLayout.jsx';
 import Login from './views/Login.jsx';
+import Register from './views/Register.jsx';
 
 const router = createBrowserRouter([
   {
@@ -20,7 +21,17 @@ const router = createBrowserRouter([
         element: <Login />
       }
     ]
-  }
+  },
+  {
+    path: "/register",
+    element: <LoginLayout />,
+    children: [
+      {
+        path: "",
+        element: <Register />
+      }
+    ]
+  },
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
