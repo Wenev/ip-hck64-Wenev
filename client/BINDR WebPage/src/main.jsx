@@ -12,6 +12,8 @@ import Register from './views/Register.jsx';
 import MainLayout from './layouts/MainLayout.jsx';
 import Home from './views/Home.jsx';
 import CollectionFinder from './views/CollectionFinder.jsx';
+import CollectionDetails from './views/CollectionDetails.jsx';
+import Collections from './views/Collections.jsx';
 
 const router = createBrowserRouter([
   {
@@ -45,6 +47,14 @@ const router = createBrowserRouter([
       {
         path: "pub/collection",
         element: <CollectionFinder />
+      },
+      {
+        path: "/collection",
+        element: <Collections />
+      },
+      {
+        path: "/collection/:collectionId",
+        element: <CollectionDetails />
       }
     ]
   },
