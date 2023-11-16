@@ -6,6 +6,8 @@ const { createToken }= require("../helpers/jwt");
 
 let newUser;
 let token;
+let secondUser;
+let secondToken;
 let newCollection;
 let newCard;
 
@@ -18,7 +20,17 @@ beforeAll(async () => {
         password: "TestUser"
     });
 
+    secondUser = await User.create({
+        username: "jimmy",
+        firstName: "Jimmy",
+        lastName: "Dollan",
+        email: "jimmydollan@mail.com",
+        password: "TestUser"
+    });
+
     token = createToken({ id: newUser.id });
+
+    secondToken = createToken({ id: secondUser.id });
 
     let collections = [
         {
@@ -163,5 +175,71 @@ describe("GET /collection/:collectionId", () => {
         expect(response.status).toBe(404);
         expect(response.body).toBeInstanceOf(Object);
         expect(response.body).toHaveProperty("message", "Data Not Found");
+    });
+});
+
+describe("PUT /collection/:collectionId", () => {
+    it("should be able to edit collection details", async () => {
+        const testData = {
+            collectionName: "Test Edit",
+        }
+        const response = await request(app).put(`/collection/${newCollection[0].id}`).set("Authorization", `Bearer ${token}`).send(testData);
+
+        expect(response.status).toBe(201);
+        expect(response.body).toBeInstanceOf(Object);
+        expect(response.body).toHaveProperty("message", "Collection successfully edited");
+    });
+
+    it("should be able to respond to 403 when not owner is editing", async () => {
+        const testData = {
+            collectionName: "Test Edit",
+        }
+        const response = await request(app).put(`/collection/${newCollection[0].id}`).set("Authorization", `Bearer ${token}`).send(testData);
+
+        expect(response.status).toBe(403);
+        expect(response.body).toBeInstanceOf(Object);
+        expect(response.body).toHaveProperty("message", "Forbidden Access");
+    });
+
+    it("should be able to respond to 400 when collectionName is invalid", async () => {
+        const testData = {
+        }
+        const response = await request(app).put(`/collection/${newCollection[0].id}`).set("Authorization", `Bearer ${token}`).send(testData);
+
+        expect(response.status).toBe(400);
+        expect(response.body).toBeInstanceOf(Object);
+        expect(response.body).toHaveProperty("message", "Collection Name must not be empty");
+    });
+
+    it("should be able to respond to 404 when collectionId is invalid", async () => {
+        const testData = {
+        }
+        const response = await request(app).put(`/collection/999`).set("Authorization", `Bearer ${token}`).send(testData);
+
+        expect(response.status).toBe(404);
+        expect(response.body).toBeInstanceOf(Object);
+        expect(response.body).toHaveProperty("message", "Data Not Found");
+    });
+
+    it("should be able to response to 401 when user is not logged in", async () => {
+        const testData = {
+            collectionName: "Test Edit",
+        }
+        const response = await request(app).put(`/collection/${newCollection[0].id}`).send(testData);
+
+        expect(response.status).toBe(401);
+        expect(response.body).toBeInstanceOf(Object);
+        expect(response.body).toHaveProperty("message", "User hasn't logged in");
+    });
+
+    it("should be able to respond to 401 when token is invalid", async () => {
+        const testData = {
+            collectionName: "Test Edit",
+        }
+        const response = await request(app).put(`/collection/${newCollection[0].id}`).set("Authorization", `Bearer InvalidToken`).send(testData);
+
+        expect(response.status).toBe(401);
+        expect(response.body).toBeInstanceOf(Object);
+        expect(response.body).toHaveProperty("message", "jwt malformed");
     });
 });
