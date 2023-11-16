@@ -83,7 +83,7 @@ class CardCollectionController {
                 }
             });
 
-            res.status(201).json({ message: `Card has been edited` });
+            res.status(200).json({ message: `Card has been edited` });
         }
         catch(error) {
             next(error);
@@ -91,10 +91,18 @@ class CardCollectionController {
     }
     static async deleteCardsInCollection(req, res, next) {
         try {
+            const { cardCollectionId } = req.params;
 
+            const deleteCard = await CardCollection.destroy({
+                where: {
+                    id: cardCollectionId
+                }
+            });
+
+            res.status(200).json({ message: "Card has successfully deleted" });
         }
         catch(error) {
-
+            next(error);
         }
     }
 }

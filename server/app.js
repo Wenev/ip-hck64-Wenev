@@ -31,7 +31,7 @@ app.use(authentication);
 
 app.post("/collections", CollectionController.postCollection);
 
-app.delete("/collections/:collectionId", ownerAuthorization, CollectionController);
+app.delete("/collections/:collectionId", ownerAuthorization, CollectionController.deleteCollection);
 
 app.put("/collection/:collectionId", ownerAuthorization, CollectionController.editCollection);
 
@@ -39,7 +39,7 @@ app.post("/collection/:collectionId", CardCollectionController.addCardToCollecti
 
 app.put("/collection/:collectionId/:cardCollectionId", ownerAuthorization, CardCollectionController.editCardsInCollection);
 
-app.delete("/collection/:collectionId/:cardCollectionId", ownerAuthorization, CardCollectionController);
+app.delete("/collection/:collectionId/:cardCollectionId", ownerAuthorization, CardCollectionController.deleteCardsInCollection);
 
 app.get("/cards", CardCollectionController.getCardsFromScryfall);
 
