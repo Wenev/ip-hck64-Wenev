@@ -1,12 +1,16 @@
 const request = require("supertest");
 
 const app = require("../app.js");
-const { Collection, User } = require("../models");
+const { CardCollection, Collection, User } = require("../models");
 const { createToken }= require("../helpers/jwt");
+const CardCollectionController = require("../controllers/CardCollectionController.js");
 
 let newUser;
 let token;
+let secondUser;
+let secondToken;
 let newCollection;
+let card;
 
 beforeAll(async () => {
     newUser = await User.create({
@@ -17,16 +21,38 @@ beforeAll(async () => {
         password: "TestUser"
     });
 
+    secondUser = await User.create({
+        username: "jimmy",
+        firstName: "Jimmy",
+        lastName: "Dollan",
+        email: "jimmydollan@mail.com",
+        password: "TestUser"
+    });
+
     token = createToken({ id: newUser.id });
+
+    secondToken = createToken({ id: secondUser.id })
 
     newCollection = await Collection.create({
         collectionName: "WOE Personal Collection",
         description: "For Test",
         UserId: newUser.id
     });
+
+    card = await CardCollection.create({
+        CardId: "f295b713-1d6a-43fd-910d-fb35414bf58a",
+        CollectionId: newCollection.id,
+        ownedFrom: new Date(),
+        purchasePrice: 1.00
+    });
 });
 
 afterAll(async () => {
+    await CardCollection.destroy({
+        truncate: true,
+        restartIdentity: true,
+        cascade: true,
+    });
     await Collection.destroy({
         truncate: true,
         restartIdentity: true,
@@ -180,4 +206,48 @@ describe("POST /collection/:collectionId", () => {
         expect(response.body).toBeInstanceOf(Object);
         expect(response.body).toHaveProperty("message", "jwt malformed");
      });
+});
+
+describe("PUT /collection/:collectionId/:cardId", () => {
+    it("should be able to edit collection cards", async () => {
+        const testData = {
+            CardId: "f295b713-1d6a-43fd-910d-fb35414bf58a",
+            purchasePrice: 1.00,
+            ownedFrom: new Date()
+        }
+
+        const response = await request(app).put(`/collection/${newCollection.id}/${card.id}`).set("Authorization", `Bearer ${token}`).send(testData);        
+        expect(response.status).toBe(200);
+        expect(response.body).toBeInstanceOf(Object);
+        expect(response.body).toHaveProperty("message", "Card has been edited");
+    });
+
+    it("should be able to respond to 403 when not owner edits the cards", async () => {
+        const testData = {
+            CardId: "f295b713-1d6a-43fd-910d-fb35414bf58a",
+            purchasePrice: 1.00,
+            ownedFrom: new Date()
+        }
+
+        const response = await request(app).put(`/collection/${newCollection.id}/${card.id}`).set("Authorization", `Bearer ${secondToken}`).send(testData);        
+        expect(response.status).toBe(403);
+        expect(response.body).toBeInstanceOf(Object);
+        expect(response.body).toHaveProperty("message", "Forbidden Access");
+    });
+});
+
+describe("DELETE /collection/:collectionId/:cardId", () => {
+    it("should be delete card from collection", async () => {
+        const response = await request(app).delete(`/collection/${newCollection.id}/${card.id}`).set("Authorization", `Bearer ${token}`);        
+        expect(response.status).toBe(200);
+        expect(response.body).toBeInstanceOf(Object);
+        expect(response.body).toHaveProperty("message", "Card has successfully deleted");
+    });
+
+    it("should be able to respond 403 when not owner deletes the cards", async () => {
+        const response = await request(app).delete(`/collection/${newCollection.id}/${card.id}`).set("Authorization", `Bearer ${secondToken}`);        
+        expect(response.status).toBe(403);
+        expect(response.body).toBeInstanceOf(Object);
+        expect(response.body).toHaveProperty("message", "Forbidden Access");
+    });
 });

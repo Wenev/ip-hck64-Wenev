@@ -96,10 +96,31 @@ class CollectionController {
                     id: collectionId,
                 }
             });
-            console.log(collectionName, description, editCollection)
             
 
-            res.status(201).json({ message: "Collection successfully edited"});
+            res.status(200).json({ message: "Collection successfully edited"});
+        }
+        catch(error) {
+            next(error);
+        }
+    }
+    static async deleteCollection(req, res, next) {
+        try {
+            const { collectionId } = req.params;
+            console.log(collectionId)
+
+            const selectedCollection = await Collection.findByPk(collectionId);
+            if(!selectedCollection) {
+                throw { name: "SequelizeDatabaseError" };
+            }
+
+            const deleteCollection = await Collection.destroy({
+                where: {
+                    id: collectionId
+                }
+            });
+
+            res.status(200).json({ message: `Collection ${selectedCollection.collectionName} has been deleted` });
         }
         catch(error) {
             next(error);

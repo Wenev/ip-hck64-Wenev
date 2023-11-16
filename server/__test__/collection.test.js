@@ -60,6 +60,11 @@ beforeAll(async () => {
 });
 
 afterAll(async () => {
+    await CardCollection.destroy({
+        truncate: true,
+        restartIdentity: true,
+        cascade: true,
+    });
     await Collection.destroy({
         truncate: true,
         restartIdentity: true,
@@ -185,7 +190,7 @@ describe("PUT /collection/:collectionId", () => {
         }
         const response = await request(app).put(`/collection/${newCollection[0].id}`).set("Authorization", `Bearer ${token}`).send(testData);
 
-        expect(response.status).toBe(201);
+        expect(response.status).toBe(200);
         expect(response.body).toBeInstanceOf(Object);
         expect(response.body).toHaveProperty("message", "Collection successfully edited");
     });
@@ -243,5 +248,23 @@ describe("PUT /collection/:collectionId", () => {
         expect(response.status).toBe(401);
         expect(response.body).toBeInstanceOf(Object);
         expect(response.body).toHaveProperty("message", "jwt malformed");
+    });
+});
+
+describe("DELETE /collection/:collectionId", () => {
+    it("should be able to delete collection", async () => {
+        const response = await request(app).delete(`/collection/${newCollection[1].id}`).set("Authorization", `Bearer ${token}`);
+
+        expect(response.status).toBe(200);
+        expect(response.body).toBeInstanceOf(Object);
+        expect(response.body).toHaveProperty("message", "Collection LOTR Personal Collection has been deleted");
+    });
+
+    it("should be able to response 403 when not owner deletes collection", async () => {
+        const response = await request(app).delete(`/collection/${newCollection[0].id}`).set("Authorization", `Bearer ${secondToken}`);
+
+        expect(response.status).toBe(403);
+        expect(response.body).toBeInstanceOf(Object);
+        expect(response.body).toHaveProperty("message", "Forbidden Access");
     });
 });

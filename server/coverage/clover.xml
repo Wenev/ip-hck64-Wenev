@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1700105846707" clover="3.2.0">
-  <project timestamp="1700105846707" name="All files">
-    <metrics statements="232" coveredstatements="222" conditionals="65" coveredconditionals="54" methods="29" coveredmethods="29" elements="326" coveredelements="305" complexity="0" loc="232" ncloc="232" packages="5" files="15" classes="15"/>
+<coverage generated="1700111427351" clover="3.2.0">
+  <project timestamp="1700111427351" name="All files">
+    <metrics statements="254" coveredstatements="239" conditionals="69" coveredconditionals="56" methods="32" coveredmethods="32" elements="355" coveredelements="327" complexity="0" loc="254" ncloc="254" packages="5" files="15" classes="15"/>
     <package name="server">
       <metrics statements="32" coveredstatements="32" conditionals="4" coveredconditionals="3" methods="0" coveredmethods="0"/>
       <file name="URLs.js" path="/Users/weneville/Documents/Personal/Projects/Coding/Hactiv/ip-hck64-Wenev/server/URLs.js">
@@ -44,9 +44,9 @@
       </file>
     </package>
     <package name="server.controllers">
-      <metrics statements="98" coveredstatements="94" conditionals="26" coveredconditionals="25" methods="10" coveredmethods="10"/>
+      <metrics statements="121" coveredstatements="112" conditionals="30" coveredconditionals="27" methods="13" coveredmethods="13"/>
       <file name="CardCollectionController.js" path="/Users/weneville/Documents/Personal/Projects/Coding/Hactiv/ip-hck64-Wenev/server/controllers/CardCollectionController.js">
-        <metrics statements="25" coveredstatements="24" conditionals="4" coveredconditionals="4" methods="2" coveredmethods="2"/>
+        <metrics statements="40" coveredstatements="36" conditionals="6" coveredconditionals="5" methods="4" coveredmethods="4"/>
         <line num="1" count="3" type="stmt"/>
         <line num="2" count="3" type="stmt"/>
         <line num="3" count="3" type="stmt"/>
@@ -71,10 +71,25 @@
         <line num="51" count="1" type="stmt"/>
         <line num="53" count="1" type="stmt"/>
         <line num="56" count="0" type="stmt"/>
-        <line num="61" count="3" type="stmt"/>
+        <line num="60" count="1" type="stmt"/>
+        <line num="61" count="1" type="stmt"/>
+        <line num="63" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="64" count="0" type="stmt"/>
+        <line num="67" count="1" type="stmt"/>
+        <line num="71" count="1" type="stmt"/>
+        <line num="73" count="1" type="stmt"/>
+        <line num="75" count="1" type="stmt"/>
+        <line num="86" count="1" type="stmt"/>
+        <line num="89" count="0" type="stmt"/>
+        <line num="93" count="1" type="stmt"/>
+        <line num="94" count="1" type="stmt"/>
+        <line num="96" count="1" type="stmt"/>
+        <line num="102" count="1" type="stmt"/>
+        <line num="105" count="0" type="stmt"/>
+        <line num="110" count="3" type="stmt"/>
       </file>
       <file name="CollectionController.js" path="/Users/weneville/Documents/Personal/Projects/Coding/Hactiv/ip-hck64-Wenev/server/controllers/CollectionController.js">
-        <metrics statements="42" coveredstatements="39" conditionals="4" coveredconditionals="4" methods="6" coveredmethods="6"/>
+        <metrics statements="50" coveredstatements="45" conditionals="6" coveredconditionals="5" methods="7" coveredmethods="7"/>
         <line num="1" count="3" type="stmt"/>
         <line num="2" count="3" type="stmt"/>
         <line num="3" count="3" type="stmt"/>
@@ -113,10 +128,18 @@
         <line num="88" count="2" type="stmt"/>
         <line num="89" count="2" type="stmt"/>
         <line num="90" count="2" type="stmt"/>
-        <line num="99" count="1" type="stmt"/>
-        <line num="102" count="1" type="stmt"/>
-        <line num="105" count="1" type="stmt"/>
-        <line num="110" count="3" type="stmt"/>
+        <line num="101" count="1" type="stmt"/>
+        <line num="104" count="1" type="stmt"/>
+        <line num="108" count="1" type="stmt"/>
+        <line num="109" count="1" type="stmt"/>
+        <line num="110" count="1" type="stmt"/>
+        <line num="112" count="1" type="stmt"/>
+        <line num="113" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="114" count="0" type="stmt"/>
+        <line num="117" count="1" type="stmt"/>
+        <line num="123" count="1" type="stmt"/>
+        <line num="126" count="0" type="stmt"/>
+        <line num="131" count="3" type="stmt"/>
       </file>
       <file name="UserController.js" path="/Users/weneville/Documents/Personal/Projects/Coding/Hactiv/ip-hck64-Wenev/server/controllers/UserController.js">
         <metrics statements="31" coveredstatements="31" conditionals="18" coveredconditionals="17" methods="2" coveredmethods="2"/>
@@ -158,77 +181,76 @@
       <file name="bcrypt.js" path="/Users/weneville/Documents/Personal/Projects/Coding/Hactiv/ip-hck64-Wenev/server/helpers/bcrypt.js">
         <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
         <line num="1" count="3" type="stmt"/>
-        <line num="4" count="7" type="stmt"/>
+        <line num="4" count="8" type="stmt"/>
         <line num="8" count="3" type="stmt"/>
         <line num="11" count="3" type="stmt"/>
       </file>
       <file name="delay.js" path="/Users/weneville/Documents/Personal/Projects/Coding/Hactiv/ip-hck64-Wenev/server/helpers/delay.js">
         <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
-        <line num="2" count="5" type="stmt"/>
-        <line num="3" count="5" type="stmt"/>
+        <line num="2" count="6" type="stmt"/>
+        <line num="3" count="6" type="stmt"/>
         <line num="7" count="3" type="stmt"/>
       </file>
       <file name="jwt.js" path="/Users/weneville/Documents/Personal/Projects/Coding/Hactiv/ip-hck64-Wenev/server/helpers/jwt.js">
         <metrics statements="5" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
         <line num="1" count="3" type="stmt"/>
         <line num="2" count="3" type="stmt"/>
-        <line num="5" count="6" type="stmt"/>
-        <line num="9" count="17" type="stmt"/>
+        <line num="5" count="7" type="stmt"/>
+        <line num="9" count="23" type="stmt"/>
         <line num="12" count="3" type="stmt"/>
       </file>
     </package>
     <package name="server.middlewares">
-      <metrics statements="50" coveredstatements="45" conditionals="25" coveredconditionals="19" methods="3" coveredmethods="3"/>
+      <metrics statements="49" coveredstatements="44" conditionals="25" coveredconditionals="19" methods="3" coveredmethods="3"/>
       <file name="authentication.js" path="/Users/weneville/Documents/Personal/Projects/Coding/Hactiv/ip-hck64-Wenev/server/middlewares/authentication.js">
         <metrics statements="20" coveredstatements="17" conditionals="8" coveredconditionals="5" methods="1" coveredmethods="1"/>
         <line num="1" count="3" type="stmt"/>
         <line num="2" count="3" type="stmt"/>
-        <line num="5" count="21" type="stmt"/>
-        <line num="6" count="21" type="stmt"/>
-        <line num="7" count="21" type="cond" truecount="2" falsecount="0"/>
+        <line num="5" count="27" type="stmt"/>
+        <line num="6" count="27" type="stmt"/>
+        <line num="7" count="27" type="cond" truecount="2" falsecount="0"/>
         <line num="8" count="4" type="stmt"/>
-        <line num="10" count="17" type="stmt"/>
-        <line num="11" count="17" type="cond" truecount="1" falsecount="1"/>
+        <line num="10" count="23" type="stmt"/>
+        <line num="11" count="23" type="cond" truecount="1" falsecount="1"/>
         <line num="12" count="0" type="stmt"/>
-        <line num="14" count="17" type="cond" truecount="1" falsecount="1"/>
+        <line num="14" count="23" type="cond" truecount="1" falsecount="1"/>
         <line num="15" count="0" type="stmt"/>
-        <line num="18" count="17" type="stmt"/>
-        <line num="20" count="17" type="stmt"/>
-        <line num="21" count="13" type="stmt"/>
-        <line num="22" count="13" type="cond" truecount="1" falsecount="1"/>
+        <line num="18" count="23" type="stmt"/>
+        <line num="20" count="23" type="stmt"/>
+        <line num="21" count="19" type="stmt"/>
+        <line num="22" count="19" type="cond" truecount="1" falsecount="1"/>
         <line num="23" count="0" type="stmt"/>
-        <line num="26" count="13" type="stmt"/>
-        <line num="27" count="13" type="stmt"/>
+        <line num="26" count="19" type="stmt"/>
+        <line num="27" count="19" type="stmt"/>
         <line num="30" count="8" type="stmt"/>
         <line num="34" count="3" type="stmt"/>
       </file>
       <file name="authorization.js" path="/Users/weneville/Documents/Personal/Projects/Coding/Hactiv/ip-hck64-Wenev/server/middlewares/authorization.js">
-        <metrics statements="12" coveredstatements="12" conditionals="4" coveredconditionals="4" methods="1" coveredmethods="1"/>
+        <metrics statements="11" coveredstatements="11" conditionals="4" coveredconditionals="4" methods="1" coveredmethods="1"/>
         <line num="1" count="3" type="stmt"/>
-        <line num="4" count="4" type="stmt"/>
-        <line num="5" count="4" type="stmt"/>
-        <line num="6" count="4" type="stmt"/>
-        <line num="7" count="4" type="stmt"/>
-        <line num="8" count="4" type="cond" truecount="2" falsecount="0"/>
+        <line num="4" count="10" type="stmt"/>
+        <line num="5" count="10" type="stmt"/>
+        <line num="6" count="10" type="stmt"/>
+        <line num="8" count="10" type="cond" truecount="2" falsecount="0"/>
         <line num="9" count="1" type="stmt"/>
-        <line num="12" count="3" type="cond" truecount="2" falsecount="0"/>
-        <line num="13" count="2" type="stmt"/>
-        <line num="16" count="1" type="stmt"/>
-        <line num="20" count="2" type="stmt"/>
+        <line num="12" count="9" type="cond" truecount="2" falsecount="0"/>
+        <line num="13" count="5" type="stmt"/>
+        <line num="16" count="4" type="stmt"/>
+        <line num="20" count="5" type="stmt"/>
         <line num="24" count="3" type="stmt"/>
       </file>
       <file name="errorHandler.js" path="/Users/weneville/Documents/Personal/Projects/Coding/Hactiv/ip-hck64-Wenev/server/middlewares/errorHandler.js">
         <metrics statements="18" coveredstatements="16" conditionals="13" coveredconditionals="10" methods="1" coveredmethods="1"/>
-        <line num="2" count="27" type="stmt"/>
-        <line num="3" count="27" type="cond" truecount="9" falsecount="2"/>
+        <line num="2" count="30" type="stmt"/>
+        <line num="3" count="30" type="cond" truecount="9" falsecount="2"/>
         <line num="7" count="10" type="stmt"/>
         <line num="8" count="10" type="stmt"/>
         <line num="10" count="3" type="stmt"/>
         <line num="11" count="3" type="stmt"/>
         <line num="14" count="8" type="stmt"/>
         <line num="15" count="8" type="stmt"/>
-        <line num="17" count="1" type="stmt"/>
-        <line num="18" count="1" type="stmt"/>
+        <line num="17" count="4" type="stmt"/>
+        <line num="18" count="4" type="stmt"/>
         <line num="21" count="4" type="stmt"/>
         <line num="22" count="4" type="stmt"/>
         <line num="24" count="1" type="cond" truecount="1" falsecount="1"/>
@@ -290,7 +312,7 @@
         <line num="16" count="3" type="stmt"/>
         <line num="19" count="3" type="stmt"/>
         <line num="114" count="3" type="stmt"/>
-        <line num="115" count="7" type="stmt"/>
+        <line num="115" count="8" type="stmt"/>
         <line num="117" count="3" type="stmt"/>
       </file>
     </package>
