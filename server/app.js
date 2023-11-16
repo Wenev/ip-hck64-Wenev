@@ -31,7 +31,7 @@ app.use(authentication);
 
 app.post("/collections", CollectionController.postCollection);
 
-app.delete("/collections/:collectionId", ownerAuthorization, CollectionController.deleteCollection);
+app.delete("/collection/:collectionId", ownerAuthorization, CollectionController.deleteCollection);
 
 app.put("/collection/:collectionId", ownerAuthorization, CollectionController.editCollection);
 

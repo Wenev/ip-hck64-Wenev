@@ -48,6 +48,11 @@ beforeAll(async () => {
 });
 
 afterAll(async () => {
+    await CardCollection.destroy({
+        truncate: true,
+        restartIdentity: true,
+        cascade: true,
+    });
     await Collection.destroy({
         truncate: true,
         restartIdentity: true,
