@@ -63,6 +63,36 @@ class UserController {
             next(error);
         }
     }
+    static async googleLogin(req, res, next) {
+        try {
+            const ticket = await client.verifyIdToken({
+                idToken: req.headers.g_token,
+                audience: process.env.G_CLIENT,
+            });
+            const payload = ticket.getPayload();
+
+            const firstName = payload.given_name;
+            const lastName = payload.family_name;
+            const username = payload.sub;
+            const  { email } = payload;
+
+            let user = await User.findOne({where: {email: email, username: username}});
+            if(!user) {
+                user = await User.create({
+                   firstName: firstName,
+                   lastName: lastName,
+                   username: username,
+                   email: email,
+                   password: String(Math.random())
+                });
+            }
+
+            res.status(200).json({access_token: createToken({id: user.id})})
+        }
+        catch(error) {
+            next(error);
+        }
+    }
 }
 
 module.exports = UserController

@@ -21,6 +21,8 @@ app.post("/register", UserController.registerUser);
 
 app.post("/login", UserController.loginUser);
 
+app.post("/auth/google", UserController.googleLogin);
+
 app.get("/collections", CollectionController.getAllCollections);
 
 app.get("/collections/:username", CollectionController.getUsersCollections);

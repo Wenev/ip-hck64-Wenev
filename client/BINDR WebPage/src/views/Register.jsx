@@ -18,9 +18,28 @@ export default function Register() {
             }
         });
     }
+    const handleRegister = async (event) => {
+        event.preventDefault();
+        try {
+            const { data } = await axios({
+                method: "post",
+                url: `${BASE_URL}/register`,
+                data: registerForm
+            });
+
+            localStorage.setItem("access_token", data.access_token);
+            navigate("/");
+        }
+        catch(error) {          
+            swal({
+                text: `${error.response.data.message}`,
+                icon: "error"
+            });
+        }
+    }
     return (
         <div className="flex flex-row place-content-center grow p-10">
-            <form className="grid xl:lg:grid-cols-2 sm:grid-cols-1 gap-3">
+            <form onSubmit={handleRegister} className="grid xl:lg:grid-cols-2 sm:grid-cols-1 gap-3">
                 <div className="mb-3">
                     <label htmlFor="exampleInputEmail1" className="form-label">
                     First Name

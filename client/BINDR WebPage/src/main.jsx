@@ -14,6 +14,8 @@ import Home from './views/Home.jsx';
 import CollectionFinder from './views/CollectionFinder.jsx';
 import CollectionDetails from './views/CollectionDetails.jsx';
 import Collections from './views/Collections.jsx';
+import CardFinder from './views/CardFinder.jsx';
+import CollectionAdd from './views/CollectionAdd.jsx';
 
 const router = createBrowserRouter([
   {
@@ -53,8 +55,19 @@ const router = createBrowserRouter([
         element: <Collections />
       },
       {
+        path: "/collection/add",
+        element: <CollectionAdd />
+      },
+      {
         path: "/collection/:collectionId",
         element: <CollectionDetails />
+      },
+      {
+        path: "/collection/:collectionId/edit"
+      },
+      {
+        path: "/collection/:collectionId/add",
+        element: <CardFinder />
       }
     ]
   },
