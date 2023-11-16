@@ -1,6 +1,23 @@
 import { Link } from "react-router-dom";
 
 export default function Register() {
+    const [registerForm, setRegisterForm] = useState({
+        firstName: "",
+        secondName: "",
+        username: "",
+        email: "",
+        password: "",
+    });
+
+    const handleChange = (event) => {
+        const { name, value } = event.target;
+        setRegisterForm(() => {
+            return {
+                ...registerForm,
+                [name]: value,
+            }
+        });
+    }
     return (
         <div className="flex flex-row place-content-center grow p-10">
             <form className="grid xl:lg:grid-cols-2 sm:grid-cols-1 gap-3">
@@ -9,6 +26,7 @@ export default function Register() {
                     First Name
                     </label>
                     <input
+                    onChange={handleChange}
                     type="text"
                     className="form-control xl:w-96 lg:w-80 sm:w-60"
                     id="firstNameInput"
@@ -20,6 +38,7 @@ export default function Register() {
                     Second Name
                     </label>
                     <input
+                    onChange={handleChange}
                     type="text"
                     className="form-control xl:w-96 lg:w-80 sm:w-60"
                     id="secondNameInput"
@@ -31,6 +50,7 @@ export default function Register() {
                     Username
                     </label>
                     <input
+                    onChange={handleChange}
                     type="text"
                     className="form-control xl:w-full"
                     id="usernameInput"
@@ -42,6 +62,7 @@ export default function Register() {
                     Email address
                     </label>
                     <input
+                    onChange={handleChange}
                     type="email"
                     className="form-control xl:w-full"
                     id="emailInput"
@@ -53,6 +74,7 @@ export default function Register() {
                     Password
                     </label>
                     <input
+                    onChange={handleChange}
                     type="password"
                     className="form-control xl:full"
                     id="passwordInput"

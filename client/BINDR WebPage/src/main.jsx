@@ -11,6 +11,7 @@ import Login from './views/Login.jsx';
 import Register from './views/Register.jsx';
 import MainLayout from './layouts/MainLayout.jsx';
 import Home from './views/Home.jsx';
+import CollectionFinder from './views/CollectionFinder.jsx';
 
 const router = createBrowserRouter([
   {
@@ -41,6 +42,10 @@ const router = createBrowserRouter([
         path: "",
         element: <Home />
       },
+      {
+        path: "pub/collection",
+        element: <CollectionFinder />
+      }
     ]
   },
 ]);
