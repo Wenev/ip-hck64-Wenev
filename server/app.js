@@ -6,7 +6,7 @@ const express = require("express");
 const app = express();
 const PORT = process.env.PORT || 3000;
 const cors = require("cors")
-const CardCollection = require("./controllers/CardCollectionController.js")
+const CardCollectionController = require("./controllers/CardCollectionController.js")
 const CollectionController = require("./controllers/CollectionController.js")
 const UserController = require("./controllers/UserController.js");
 const authentication = require("./middlewares/authentication.js");
@@ -31,9 +31,17 @@ app.use(authentication);
 
 app.post("/collections", CollectionController.postCollection);
 
-app.post("/collection/:collectionId", CardCollection.addCardToCollection);
+app.delete("/collections/:collectionId", ownerAuthorization, CollectionController);
 
-app.get("/cards", CardCollection.getCardsFromScryfall);
+app.post("/collection/:collectionId", CardCollectionController.addCardToCollection);
+
+app.put("/collection/:collectionId", ownerAuthorization, CollectionController.editCollection);
+
+app.put("/collection/:collectionId/:cardCollectionId", ownerAuthorization, CardCollectionController);
+
+app.delete("/collection/:collectionId/:cardCollectionId", ownerAuthorization, CardCollectionController);
+
+app.get("/cards", CardCollectionController.getCardsFromScryfall);
 
 app.use(errorHandler);
 
