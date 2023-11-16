@@ -194,7 +194,7 @@ describe("PUT /collection/:collectionId", () => {
         const testData = {
             collectionName: "Test Edit",
         }
-        const response = await request(app).put(`/collection/${newCollection[0].id}`).set("Authorization", `Bearer ${token}`).send(testData);
+        const response = await request(app).put(`/collection/${newCollection[0].id}`).set("Authorization", `Bearer ${secondToken}`).send(testData);
 
         expect(response.status).toBe(403);
         expect(response.body).toBeInstanceOf(Object);
@@ -203,6 +203,7 @@ describe("PUT /collection/:collectionId", () => {
 
     it("should be able to respond to 400 when collectionName is invalid", async () => {
         const testData = {
+            collectionName: ""
         }
         const response = await request(app).put(`/collection/${newCollection[0].id}`).set("Authorization", `Bearer ${token}`).send(testData);
 
@@ -213,6 +214,7 @@ describe("PUT /collection/:collectionId", () => {
 
     it("should be able to respond to 404 when collectionId is invalid", async () => {
         const testData = {
+
         }
         const response = await request(app).put(`/collection/999`).set("Authorization", `Bearer ${token}`).send(testData);
 

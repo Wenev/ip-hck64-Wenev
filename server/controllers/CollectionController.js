@@ -82,6 +82,29 @@ class CollectionController {
             next(error);
         }
     }
+    static async editCollection(req, res, next) {
+        try {
+            const { collectionName, description } = req.body;
+            const UserId = req.user.id
+            const { collectionId } = req.params;
+            const editCollection = await Collection.update({
+                collectionName: collectionName,
+                description: description,
+                UserId: UserId
+            },{
+                where: {
+                    id: collectionId,
+                }
+            });
+            console.log(collectionName, description, editCollection)
+            
+
+            res.status(201).json({ message: "Collection successfully edited"});
+        }
+        catch(error) {
+            next(error);
+        }
+    }
 }
 
 module.exports = CollectionController
