@@ -2,13 +2,31 @@ const { default: axios } = require("axios");
 const { delay } = require("../helpers/delay");
 const { CardCollection, Collection, User } = require("../models");
 const { scryfallUrl } = require("../URLs");
+const { Op } = require("sequelize");
 
 class CollectionController {
     static async getAllCollections(req, res, next) {
         try {
-            const allCollections = await Collection.findAll();
+            const options = { where: {}, limit: 25, offset: 0 };
+            if(req.query.search) {
+                options.where.collectionName = { [Op.iLike]: `%${req.query.search}%` };
+            }
+            if(req.query.page) {
+                options.offset = 25 * (+req.query.page - 1);
+            }
+            
+            if(!req.query.page) {
+                req.query.page = 1;                            
+            }
+            const allCollections = await Collection.findAll(options);
 
-            res.status(200).json(allCollections);
+            const result = {
+                page: +req.query.page,
+                length: allCollections.length,
+                data: allCollections
+            }
+
+            res.status(200).json(result);
         }
         catch(error) {
             next(error);
@@ -110,9 +128,6 @@ class CollectionController {
             console.log(collectionId)
 
             const selectedCollection = await Collection.findByPk(collectionId);
-            if(!selectedCollection) {
-                throw { name: "SequelizeDatabaseError" };
-            }
 
             const deleteCollection = await Collection.destroy({
                 where: {
