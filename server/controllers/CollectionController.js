@@ -96,13 +96,20 @@ class CollectionController {
                     id: collectionId,
                 }
             });
-            console.log(collectionName, description, editCollection)
             
 
             res.status(201).json({ message: "Collection successfully edited"});
         }
         catch(error) {
             next(error);
+        }
+    }
+    static async deleteCollection(req, res, next) {
+        try {
+
+        }
+        catch(error) {
+            
         }
     }
 }

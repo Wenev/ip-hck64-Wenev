@@ -33,11 +33,11 @@ app.post("/collections", CollectionController.postCollection);
 
 app.delete("/collections/:collectionId", ownerAuthorization, CollectionController);
 
-app.post("/collection/:collectionId", CardCollectionController.addCardToCollection);
-
 app.put("/collection/:collectionId", ownerAuthorization, CollectionController.editCollection);
 
-app.put("/collection/:collectionId/:cardCollectionId", ownerAuthorization, CardCollectionController);
+app.post("/collection/:collectionId", CardCollectionController.addCardToCollection);
+
+app.put("/collection/:collectionId/:cardCollectionId", ownerAuthorization, CardCollectionController.editCardsInCollection);
 
 app.delete("/collection/:collectionId/:cardCollectionId", ownerAuthorization, CardCollectionController);
 

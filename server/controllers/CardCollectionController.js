@@ -56,6 +56,47 @@ class CardCollectionController {
             next(error);
         }
     }
+    static async editCardsInCollection(req, res, next) {
+        try {
+            const { CardId, ownedFrom, purchasePrice } = req.body;
+
+            if(!CardId) {
+                throw { name: "InvalidInput", message: "CardId must not be empty" };
+            }
+
+            const { data } = await axios({
+                method: "get",
+                url: `${scryfallUrl}/cards/${CardId}`
+            });
+            await delay(80);
+
+            const { collectionId, cardCollectionId } = req.params;
+
+            const editCard = await CardCollection.update({
+                CardId: CardId,
+                ownedFrom: ownedFrom,
+                purchasePrice: purchasePrice,
+                CollectionId: collectionId
+            }, {
+                where: {
+                    id: cardCollectionId
+                }
+            });
+
+            res.status(201).json({ message: `Card has been edited` });
+        }
+        catch(error) {
+            next(error);
+        }
+    }
+    static async deleteCardsInCollection(req, res, next) {
+        try {
+
+        }
+        catch(error) {
+
+        }
+    }
 }
 
 module.exports = CardCollectionController
