@@ -25,10 +25,10 @@ export default function Login() {
                     id="exampleInputPassword1"
                     />
                 </div>
-                <button type="submit" className="duration-300 hover:ease-in-out btn btn-primary hover:underline my-1 ">
+                <button type="submit" className="duration-300 hover:ease-in-out btn btn-primary hover:underline my-2">
                     Login
                 </button>
-                <Link to={"/sign-up"} className="hover:text-yellow-500 hover:underline my-1">
+                <Link to={"/sign-up"} className="text-center hover:text-yellow-500 hover:underline my-2">
                     Sign-Up
                 </Link>
             </form>

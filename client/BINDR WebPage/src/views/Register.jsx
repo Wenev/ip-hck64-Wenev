@@ -62,6 +62,9 @@ export default function Register() {
                 <button type="submit" className="xl:lg:md:col-span-2 duration-300 hover:ease-in-out btn btn-success hover:underline my-1">
                     Sign Up
                 </button>
+                <Link to={"/login"} className="xl:lg:md:col-span-2 text-center hover:text-yellow-500 hover:underline my-2">
+                    Login
+                </Link>
             </form>
         </div>
     )

@@ -5,11 +5,12 @@ import {
   createBrowserRouter,
   redirect,
 } from 'react-router-dom';
-import App from './App.jsx'
-import './index.css'
+
 import LoginLayout from './layouts/LoginLayout.jsx';
 import Login from './views/Login.jsx';
 import Register from './views/Register.jsx';
+import MainLayout from './layouts/MainLayout.jsx';
+import Home from './views/Home.jsx';
 
 const router = createBrowserRouter([
   {
@@ -19,17 +20,27 @@ const router = createBrowserRouter([
       {
         path: "",
         element: <Login />
-      }
+      },
     ]
   },
   {
-    path: "/register",
+    path: "/sign-up",
     element: <LoginLayout />,
     children: [
       {
         path: "",
         element: <Register />
-      }
+      },
+    ]
+  },
+  {
+    path: "/",
+    element: <MainLayout />,
+    children: [
+      {
+        path: "",
+        element: <Home />
+      },
     ]
   },
 ]);
