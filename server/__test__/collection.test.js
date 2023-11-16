@@ -79,13 +79,16 @@ afterAll(async () => {
 
 describe("GET /collections", () => {
     it("should be able to get all collections", async () => {
-        const response = await request(app).get("/collections").set("Authorization", `Bearer ${token}`);
+        const response = await request(app).get("/collections").set("Authorization", `Bearer ${token}`).query({ search: "woe", page: 1 });
 
         expect(response.status).toBe(200);
-        expect(response.body).toBeInstanceOf(Array);
-        expect(response.body[0]).toHaveProperty("id", expect.any(Number));
-        expect(response.body[0]).toHaveProperty("collectionName", "WOE Personal Collection");
-        expect(response.body[0]).toHaveProperty("UserId", newUser.id);
+        expect(response.body).toBeInstanceOf(Object);
+        expect(response.body).toHaveProperty("page", 1);
+        expect(response.body).toHaveProperty("length", expect.any(Number));
+        expect(response.body.data).toBeInstanceOf(Array);
+        expect(response.body.data[0]).toHaveProperty("id", expect.any(Number));
+        expect(response.body.data[0]).toHaveProperty("collectionName", "WOE Personal Collection");
+        expect(response.body.data[0]).toHaveProperty("UserId", newUser.id);
     });
 });
 
