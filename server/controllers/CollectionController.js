@@ -86,11 +86,12 @@ class CollectionController {
             }
 
             collection.Cards.map(async (card) => {
-                card.data = await axios({
+                const {data} = await axios({
                     method: "get",
-                    url: `${scryfallUrl}/${card.CardId}`
+                    url: `${scryfallUrl}/cards/${card.CardId}`
                 })
                 await delay(80);
+                card.data = data;
                 return card;
             });
 
