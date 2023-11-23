@@ -8,15 +8,24 @@ import swal from "sweetalert";
 export default function Login() {
     const navigate = useNavigate();
     async function handleCredentialResponse(response) {
-        const { data } = await axios({
-            method: "post",
-            url: `${BASE_URL}/auth/google`,
-            headers: {
-                g_token: response.credential
-            }
-        });
-        localStorage.setItem("access_token", data.access_token);
-        navigate("/")
+        try {
+            const { data } = await axios({
+                method: "post",
+                url: `${BASE_URL}/auth/google`,
+                headers: {
+                    g_token: response.credential
+                }
+            });
+            localStorage.setItem("access_token", data.access_token);
+            navigate("/")
+        }
+        catch(error) {
+            console.log(error)
+            swal({
+                text: error.response.data.message,
+                icon: "error"
+            });
+        }
     }
 
     useEffect(() => {
@@ -30,6 +39,7 @@ export default function Login() {
           );
           google.accounts.id.prompt();
     }, []);
+
     const [loginForm, setLoginForm] = useState({
         email: "",
         password: ""
