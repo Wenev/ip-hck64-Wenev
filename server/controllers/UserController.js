@@ -1,6 +1,8 @@
 const { User } = require("../models");
 const { comparePass } = require("../helpers/bcrypt.js");
 const { createToken } = require("../helpers/jwt.js");
+const {OAuth2Client} = require('google-auth-library');
+const client = new OAuth2Client();
 
 class UserController {
     static async registerUser(req, res, next) {
