@@ -53,7 +53,7 @@ class UserController {
             
             const token = createToken({ id: user.id });
 
-            res.status(200).json({ access_token: token });
+            res.status(200).json({ access_token: token, username: user.username });
         }
         catch(error) {
             if(error.name === "InvalidInput") {
@@ -89,7 +89,7 @@ class UserController {
                 });
             }
 
-            res.status(200).json({access_token: createToken({id: user.id})})
+            res.status(200).json({access_token: createToken({id: user.id}), username: user.username})
         }
         catch(error) {
             next(error);

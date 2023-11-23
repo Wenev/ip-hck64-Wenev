@@ -1,20 +1,75 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaSearch } from "react-icons/fa";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import axios from "axios";
+import BASE_URL from "../../../BASE_URL";
+import swal from "sweetalert"
 
 export default function CardFinder() {
+    const navigate = useNavigate();
+    const params = useParams();
+    const [cards, setCards] = useState([]);
     const [search, setSearch] = useState("");
 
     const handleChange = (event) => {
         const { value } = event.target;
-        setSearch(() => {
-            return {
-                value
-            }
-        });
+        setSearch(value);
     }
+
+    const fetchCards = async (event) => {
+        event.preventDefault();
+        try {
+            const { data } = await axios({
+                method: "get",
+                url: `${BASE_URL}/cards`,
+                params: {
+                    search: search,
+                },
+                headers: {
+                    authorization: `Bearer ${localStorage.access_token}`
+                }
+            });
+            console.log(data.data)
+            setCards(data.data);
+        }
+        catch(error) {
+            swal({
+                text: `${error.response.data.message}`,
+                icon: "error"
+            });
+        }
+    }
+
+    const handleAddCard = async (CardId) => {
+        try {
+            const { data } = await axios({
+                method: "post",
+                url: `${BASE_URL}/collection/${params.collectionId}`,
+                data: {
+                    CardId: CardId
+                },
+                headers: {
+                    authorization: `Bearer ${localStorage.access_token}`
+                }
+            });
+
+            swal({
+                text: `${data.message}`,
+                icon: "success"
+            });
+            navigate(`/collection/${params.collectionId}`);
+        }
+        catch(error) {
+            swal({
+                text: `${error.response.data.message}`,
+                icon: "error"
+            });
+        }
+    }
+
     return (
         <div className="flex flex-col place-content-center m-4">
-            <form className="mb-4">       
+            <form onSubmit={fetchCards} className="mb-4">       
                 <label
                     htmlFor="default-search"
                     className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white"
@@ -40,15 +95,18 @@ export default function CardFinder() {
                 </div>
             </form>
             <div className="grid xl:lg:grid-rows-4 md:grid-rows-1 gap-3 place-content-center">
-                <div className="flex flex-col text-justify">
-                    <img src="..." className="w-40 h-48"></img>
-                    <h2>Name: </h2>
-                    <div className="grid grid-row-2 gap-2 w">
-                        <button type="button" className="btn btn-success">
-                            Add Card
-                        </button>
+                {cards.map((card) => {
+                    return (
+                    <div key={card.id} className="flex flex-col text-justify">
+                        <img src={card.image_uris.png} className="h-70 w-56 my-3"></img>
+                        <div className="grid grid-row-2 gap-2 w">
+                            <button onClick={() => handleAddCard(card.id)} type="button" className="btn btn-success">
+                                Add Card
+                            </button>
+                        </div>
                     </div>
-                </div>
+                    )
+                })}
             </div>
         </div>
     )

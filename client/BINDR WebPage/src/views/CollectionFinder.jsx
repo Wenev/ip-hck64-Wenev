@@ -1,17 +1,55 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaSearch } from "react-icons/fa";
+import swal from "sweetalert";
+import axios from "axios";
+import BASE_URL from "../../../BASE_URL";
+import { Link } from "react-router-dom";
 
 export default function CollectionFinder() {
+    const [collectionLength, setCollectionLength] = useState(0)
+    const [collections, setCollections] = useState([]);
     const [search, setSearch] = useState("");
+    const [page, setPage] = useState(1);
+
+    useEffect(() => {
+        let ignore = false;
+
+        fetchCollections(ignore);
+
+        return () => (ignore = true);
+    }, [search, page]);
 
     const handleChange = (event) => {
         const { value } = event.target;
-        setSearch(() => {
-            return {
-                value
-            }
-        });
+        setSearch(value);
     }
+
+
+
+    const fetchCollections = async (ignore) => {
+        try {
+            const { data } = await axios({
+               method: "get",
+               url: `${BASE_URL}/collections`,
+               params: {
+                search: search,
+                page: page
+               } 
+            });
+
+            if(!ignore) {
+                setCollections(data.data);
+                setCollectionLength(data.length);
+            }
+        }
+        catch(error) {
+            swal({
+                text: error.response.data.message,
+                icon: "error"
+            });
+        }
+    }
+
     return (
         <div className="flex flex-col place-content-center m-4">
             <form className="mb-4">       
@@ -39,22 +77,24 @@ export default function CollectionFinder() {
                     </button>
                 </div>
             </form>
-            <table class="table-auto">
+            <table className="table-auto">
                 <thead>
                     <tr>
                         <th>Collection Name</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>The Sliding Mr. Bones (Next Stop, Pottersville)</td>
-                    </tr>
-                    <tr>
-                        <td>Witchy Woman</td>
-                    </tr>
-                    <tr>
-                        <td>Shining Star</td>
-                    </tr>
+                    {collections.map(collection => {
+                        return (
+                            <tr key={collection.id}>
+                                <Link to={`/pub/collection/${collection.id}`}>
+                                    <td>
+                                        {collection.collectionName}
+                                    </td> 
+                                </Link>
+                            </tr>
+                        )
+                    })}
                 </tbody>
             </table>
         </div>

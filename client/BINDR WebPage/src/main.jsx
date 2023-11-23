@@ -51,22 +51,26 @@ const router = createBrowserRouter([
         element: <CollectionFinder />
       },
       {
-        path: "/collection",
-        element: <Collections />
-      },
-      {
-        path: "/collection/add",
-        element: <CollectionAdd />
-      },
-      {
-        path: "/collection/:collectionId",
+        path: "pub/collection/:collectionId",
         element: <CollectionDetails />
       },
       {
-        path: "/collection/:collectionId/edit"
+        path: "collection",
+        element: <Collections />
       },
       {
-        path: "/collection/:collectionId/add",
+        path: "collection/add",
+        element: <CollectionAdd />
+      },
+      {
+        path: "collection/:collectionId",
+        element: <CollectionDetails />
+      },
+      {
+        path: "collection/:collectionId/edit"
+      },
+      {
+        path: "collection/:collectionId/add",
         element: <CardFinder />
       }
     ]

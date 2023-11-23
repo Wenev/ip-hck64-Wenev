@@ -17,10 +17,10 @@ export default function Login() {
                 }
             });
             localStorage.setItem("access_token", data.access_token);
-            navigate("/")
+            localStorage.setItem("username", data.username);
+            navigate("/");
         }
         catch(error) {
-            console.log(error)
             swal({
                 text: error.response.data.message,
                 icon: "error"
